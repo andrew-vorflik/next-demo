@@ -25,9 +25,10 @@ const BlogPage = async ({params: {id}}: BlogPageProps) => {
   const post = await getData(id);
   
   return (
-    <div>Single post Page
-    <p>{post.title}</p>
-    <p>{post.body}</p>
+    <div>
+      <h3>Single post Page</h3>
+      <p>{post.title}</p>
+      <p style={{color: 'gray'}}>{post.body}</p>
     </div>
   )
 }
