@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 
 
 async function getData() {
-  const response = await fetch('https://jsonplaceholder.typicode.com/posts123123');
+  const response = await fetch('https://jsonplaceholder.typicode.com/posts');
 
   if (!response.ok) {
     throw new Error('Sorry, we have problem with response');
