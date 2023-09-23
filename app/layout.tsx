@@ -3,6 +3,7 @@ import TheFooter from '@/components/TheFooter/TheFooter'
 import './globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
+import Providers from '@/components/Providers/Providers'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -19,11 +20,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <TheHeader />
-        <main className="container">
-        {children}
-        </main>
-        <TheFooter />
+        <Providers>
+          <TheHeader />
+          <main className="container">
+          {children}
+          </main>
+          <TheFooter />
+        </Providers>
       </body>
     </html>
   )

@@ -1,12 +1,17 @@
 import Link from 'next/link'
 import React from 'react'
+import Navigation from '../Navigation/Navigation'
+
+const navItems = [
+  {href: '/', title: 'Home'},
+  {href: '/about', title: 'About'},
+  {href: '/blog', title: 'Blog'},
+]
 
 const TheHeader = () => {
   return (
     <header>
-      <Link href="/">Home</Link>
-      <Link href="/blog">Blog</Link>
-      <Link href="/about">About</Link>
+      <Navigation navLinks={navItems} />
     </header>
   )
 }

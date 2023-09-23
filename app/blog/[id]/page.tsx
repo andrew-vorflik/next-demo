@@ -13,6 +13,14 @@ async function getData(id: string) {
   return response.json();
 }
 
+export async function generateStaticParams() {
+  const posts: any[] = await fetch('https://jsonplaceholder.typicode.com/posts').then((res) => res.json())
+ 
+  return posts.map((post) => ({
+    slug: post.slug,
+  }))
+}
+
 export  const generateMetadata = async ({params: {id}}: BlogPageProps): Promise<Metadata> => {
   const post = await getData(id);
 
@@ -20,6 +28,14 @@ export  const generateMetadata = async ({params: {id}}: BlogPageProps): Promise<
     title: `Blog ${post.title}`
   }
 }
+
+// export async function generateStaticParams() {
+//   const posts: any[] = await fetch('https://jsonplaceholder.typicode.com/posts').then((res) => res.json())
+
+//   return posts.map((post) => ({
+//     slug: post.id,
+//   }));
+// }
 
 const BlogPage = async ({params: {id}}: BlogPageProps) => {
   const post = await getData(id);

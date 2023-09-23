@@ -1,3 +1,7 @@
+'use client';
+import Posts from '@/components/Posts/Posts';
+import PostsSearch from '@/components/PostsSearch/PostsSearch';
+import useSWR from 'swr';
 import { Metadata } from 'next'
 import Link from 'next/link';
 import React from 'react'
@@ -6,8 +10,10 @@ export const metadata: Metadata = {
   title: 'Blog',
 }
 
+export const revalidate = 10;
 
-async function getData() {
+async function getPosts() {
+  // const response = await fetch('https://jsonplaceholder.typicode.com/posts');
   const response = await fetch('https://jsonplaceholder.typicode.com/posts');
 
   if (!response.ok) {
@@ -17,17 +23,17 @@ async function getData() {
   return response.json();
 }
 
-const Blog = async () => {
-  const posts = await getData();
+const Blog = () => {
+  const {data: posts, isLoading} = useSWR('posts', getPosts)
+  // const posts = await getData();
 
   return (
     <>
       <h2>BlogPage</h2>
-      <ul>
-        {posts.map((post: any) => (
-          <li key={post.id}><Link href={`/blog/${post.id}`}>{post.title}</Link></li>
-        ))}
-      </ul>
+      <PostsSearch />
+      {isLoading ? <h3>Loading</h3> :
+        <Posts posts={posts} />
+      }
     </>
   )
 }
